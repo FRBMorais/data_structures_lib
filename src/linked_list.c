@@ -36,6 +36,9 @@ LinkedList *linked_list_create(){
     return new_linked_list;
 }
 
+/* ---------------------------------------------------------------*/
+/* Corpos get data e metadados */
+/* ---------------------------------------------------------------*/
 /* retorna o valor do nó imediatamente a direita do cursor,
    caso não exista, retorna o menor inteiro positivo de 32 bits */
 int linked_list_get_value(LinkedList *linked_list) {
@@ -45,5 +48,104 @@ int linked_list_get_value(LinkedList *linked_list) {
     } else {
         return INT_MIN;  /* Não há nenhum valor da direita do cursor */
     }
+
+}
+
+/* retorna a quantidade de elementos na linkedlist */
+int linked_list_length(LinkedList *linked_list) {
+
+    return linked_list->size;
+
+}
+
+/* retorna 1 se a linked_list esta vazia, e 0 se nao esta */
+int linked_list_is_empty(LinkedList *linked_list) {
+
+    return !(linked_list->size == 0);
+
+}
+
+/* ---------------------------------------------------------------*/
+/* Corpos das funções responsáveis por mover o cursor */
+/* ---------------------------------------------------------------*/
+/* move o ponteiro do cursor para o próximo elemento,
+se nao existir, proximo elemento, nao faz nada */
+void linked_list_next(LinkedList *linked_list){
+
+    if( linked_list->curr->next && linked_list->curr != linked_list->tail ) {
+        linked_list->curr = linked_list->curr->next;
+    }
+
+}
+
+/* move o ponteiro do cursor para o elemento anterior,
+se nao existir (for o no cabeca), nao faz nada */
+void linked_list_prev(LinkedList *linked_list){
+
+}
+
+/* move o ponteiro do cursor para o ponteiro que a apontar para a no sentinela cabeça */
+void linked_list_move_to_start(LinkedList *linked_list){
+    
+    linked_list->curr = linked_list->head;
+
+}
+
+/* move o ponteiro do cursor para a ponteiro que aponta para a calda */
+void linked_list_move_to_end(LinkedList *linked_list){
+    
+    linked_list->curr = linked_list->tail;
+
+}
+
+/* move o cursor para um indice especifico */
+void linked_list_move_to_pos(LinkedList *linked_list, unsigned int index){
+
+}
+
+
+/* ---------------------------------------------------------------*/
+/* Corpos das funções para inserir valores */
+/* ---------------------------------------------------------------*/
+/* insere um valor a direita do cursor na linked_list a ajusta o
+ponteiro da calda se necessario */
+void linked_list_insert_value(LinkedList *linked_list){
+
+}
+
+/* insere um valor em um posicao especificada na linked_list,
+e a ajusta o ponteiro da calda se necessario*/
+void linked_list_insert_value_at(LinkedList *linked_list, unsigned int index){
+
+}
+
+/* insere um valor no final da linked_list */
+void linked_list_append(LinkedList *linked_list){
+
+}
+
+/* ---------------------------------------------------------------*/
+/* Corpos das funções para remover valores e desalocar memória */
+/* ---------------------------------------------------------------*/
+/* remove um elemento a direita do cursor, se houver, e o retorna,
+caso contrário, retorna o menor inteiro da macro em limits.h*/
+int linked_list_remove_element(LinkedList *linked_list){
+
+}
+
+/* remove um elemento em uma posicao especificada, se houver, e o retorna,
+caso contrário, retorna o menor inteiro da macro em limits.h*/
+int linked_list_remove_element_at(LinkedList *linked_list, unsigned int index){
+
+}
+
+/* remove todos os elementos da linked_list */
+int linked_list_clear_list(LinkedList *linked_list){
+
+}
+
+/* remove todos os elementos da linked_list e desaloca memória
+dos nós e da linked_list */
+int linked_list_destroy(LinkedList *linked_list){
 
 }
