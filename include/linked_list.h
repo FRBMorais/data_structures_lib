@@ -20,4 +20,7 @@ typedef struct LinkedList {
 Node *node_create(int data);
 LinkedList *linked_list_create();
 
+/* Protótipos get */
+int linked_list_get_value(LinkedList *linked_list);
+
 #endif

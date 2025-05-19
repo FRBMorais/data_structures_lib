@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include "../include/linked_list.h"
 
 
@@ -33,4 +34,16 @@ LinkedList *linked_list_create(){
     new_linked_list->curr = new_linked_list->head = new_linked_list->tail = sentinel;
 
     return new_linked_list;
+}
+
+/* retorna o valor do nó imediatamente a direita do cursor,
+   caso não exista, retorna o menor inteiro positivo de 32 bits */
+int linked_list_get_value(LinkedList *linked_list) {
+
+    if(linked_list->curr->next) {
+        return linked_list->curr->next->data;
+    } else {
+        return INT_MIN;  /* Não há nenhum valor da direita do cursor */
+    }
+
 }
