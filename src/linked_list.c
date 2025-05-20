@@ -32,7 +32,7 @@ LinkedList *linked_list_create(){
     
     /* atribuições */
     new_linked_list->curr = new_linked_list->head = new_linked_list->tail = sentinel;
-
+    new_linked_list->size = 0;
     return new_linked_list;
 }
 
@@ -40,7 +40,7 @@ LinkedList *linked_list_create(){
 /* Corpos get data e metadados */
 /* ---------------------------------------------------------------*/
 /* retorna o valor do nó imediatamente a direita do cursor,
-   caso não exista, retorna o menor inteiro positivo de 32 bits */
+   caso não exista, retorna o menor inteiro negativo de 32 bits */
 int linked_list_get_value(LinkedList *linked_list) {
 
     if(linked_list->curr->next) {
@@ -61,7 +61,7 @@ int linked_list_length(LinkedList *linked_list) {
 /* retorna 1 se a linked_list esta vazia, e 0 se nao esta */
 int linked_list_is_empty(LinkedList *linked_list) {
 
-    return !(linked_list->size == 0);
+    return linked_list->size == 0;
 
 }
 
@@ -101,6 +101,16 @@ void linked_list_move_to_end(LinkedList *linked_list){
 /* move o cursor para um indice especifico */
 void linked_list_move_to_pos(LinkedList *linked_list, unsigned int index){
 
+    
+    if(index > linked_list->size) {
+        printf("***IndexError: Index out of range***\n");
+    } else {
+        linked_list->curr = linked_list->head;
+        for(int i = 0; i < index; i++) {
+            linked_list_next(linked_list);
+        }
+    }
+    
 }
 
 
@@ -109,18 +119,46 @@ void linked_list_move_to_pos(LinkedList *linked_list, unsigned int index){
 /* ---------------------------------------------------------------*/
 /* insere um valor a direita do cursor na linked_list a ajusta o
 ponteiro da calda se necessario */
-void linked_list_insert_value(LinkedList *linked_list){
+void linked_list_insert_value(LinkedList *linked_list, int data){
+
+    Node *insert_node = node_create(data);
+
+    insert_node->next = linked_list->curr->next;
+    linked_list->curr->next = insert_node;
+
+    if(linked_list->curr == linked_list->tail) { /* Caso a insercao foi no final da linked_list */
+        linked_list->tail = insert_node;  /* ajusta a calda para o novo nó inserido */
+    }
+
+    linked_list->size++; /* atualiza o tamanho da linked list */
 
 }
 
 /* insere um valor em um posicao especificada na linked_list,
 e a ajusta o ponteiro da calda se necessario*/
-void linked_list_insert_value_at(LinkedList *linked_list, unsigned int index){
+void linked_list_insert_value_at(LinkedList *linked_list, int data, unsigned int index){
+
+    if (index > linked_list->size) {
+        printf("***IndexError: Index out of range***\n");
+        return;
+    }
+
+    Node *temp = linked_list->curr; /* salva a posicao atual do cursor */
+
+    linked_list_move_to_pos(linked_list, index);
+    linked_list_insert_value(linked_list, data);
+
+    linked_list->curr = temp; /* retorna o cursor para a posicao original */
 
 }
 
 /* insere um valor no final da linked_list */
-void linked_list_append(LinkedList *linked_list){
+void linked_list_append(LinkedList *linked_list, int data){
+
+    Node *new_node = node_create(data);
+    linked_list->tail->next = new_node;
+    linked_list->tail = new_node;    
+    linked_list->size++;          
 
 }
 
