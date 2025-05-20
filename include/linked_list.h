@@ -33,9 +33,9 @@ void linked_list_move_to_end(LinkedList *linked_list);
 void linked_list_move_to_pos(LinkedList *linked_list, unsigned int idx);
 
 /* Protótipos das funções para inserir valores */
-void linked_list_insert_value(LinkedList *linked_list);
-void linked_list_insert_value_at(LinkedList *linked_list, unsigned int idx);
-void linked_list_append(LinkedList *linked_list);
+void linked_list_insert_value(LinkedList *linked_list, int data);
+void linked_list_insert_value_at(LinkedList *linked_list, int data, unsigned int idx);
+void linked_list_append(LinkedList *linked_list, int data);
 
 /* Protótipos das funções para remover valores e desalocar memória */
 int linked_list_remove_element(LinkedList *linked_list);
